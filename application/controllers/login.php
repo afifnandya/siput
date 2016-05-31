@@ -1,26 +1,35 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class login extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('login');
-	}
+    public function index(){
+        if($this->session->userdata('isLogin')){
+            redirect('home');
+        }
+            $this->load->view("login");
+        }
+        function validate(){
+            $this->load->model('m_user');
+            $username = $this->input->post('username');
+            $password = md5($this->input->post('password'));
+            $query = $this->m_user->validate($username,$password);
+                if($query != NULL){
+                    foreach ($query as $row){
+                        $data_session = array(
+                                'Id_admin'	     => $row['Id_admin'],
+                                'Nama_admin'  	 => $row['Nama_admin'],
+                                'Pass_admin'	 => $row['Pass_admin'],
+                        );
+                    }
+                    $this->session->set_userdata('isLogin', $data_session);                   
+                    redirect('home');
+                }else{
+                    redirect('login');
+				}
+        }
+        function logout(){
+            $this->session->unset_userdata('isLogin');
+            redirect('login');
+        }
 }
 
 /* End of file welcome.php */

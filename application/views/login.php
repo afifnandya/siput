@@ -30,19 +30,19 @@
                     <div class="inner-down">
                         <p class="login-header">Login</p>
                         <p class="login-subheader">Masukkan Username dan Password</p>
-                        <form action="">
+                        <form action="<?php echo site_url('login/validate')?>" method="post">
                             <div class="form-group">
                                 <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                    <input type="text" class="form-control" placeholder="username" name="username">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></div>
-                                    <input type="password" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                    <input type="password" class="form-control" placeholder="password" id="exampleInputAmount" name="password">
                                 </div>
                             </div>
-                            <input type="submit" value="Log In" class="login-btn center-block">
+                            <input type="submit" value="Log In" class="login-btn center-block" name="submit">
                         </form>
                     </div>
                 </div>

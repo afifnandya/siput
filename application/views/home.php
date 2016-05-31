@@ -16,6 +16,12 @@
     html{
         height: 100%;
     }
+    .left-menu2{
+        width: 16.66666667%;
+        z-index: 10000;
+        position: absolute;
+        left: -100%;
+    }
     .map-wrap{
         position: relative
     }
@@ -66,52 +72,20 @@
     }
 </style>
 <body>
-    <nav>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-2 no-padding left-nav-wrap">
-                    <div class="left-nav">
-                        <p>SIPUT
-                        <a href="<?php echo base_url() ?>javascript:" id="afif" class="afif-aktif"><i class="fa fa-bars"></i></a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-7 no-padding">
-                    <div class="center-nav">
-                        <div class="search-nav">
-                            <input type="text" placeholder="search">
-                        </div>
-                    </div>
-                </div>
-                <a href="" data-target="#" data-toggle="dropdown">
-                <div class="col-xs-3 no-padding dropdown fif">
-                    <div class="right-nav">
-                        <ul class="">
-                           <li class="user-photo">
-                                <img src="<?php echo base_url() ?>/assets/img/logo-dinas-pendidikan.png" height="40" width="40">
-                            </li>
-                            <li class="user-name" data-toggle="dropdown">
-                                Dinas Pendidikan Kota Malang<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="">Logout<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-                            </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+   <?php var_dump($map_sekolah)?>
+    <!-- nav -->
+    <?php $this->load->view('nav')?>
+    <!-- end nav -->
     <div class="container-fluid">
-        <div class="row row-wrap">
-            <!--left-menu-->
-            <div class="col-xs-2 left-menu2">
+       <!--left-menu-->
+            <div class="left-menu2">
                 <p class="menu-item"><i class="fa fa-building-o"></i>Sekolah</p>
                 <p class="menu-item"><i class="fa fa-building-o"></i>Sekolah</p>
                 <p class="menu-item"><i class="fa fa-building-o"></i>Sekolah</p>
             </div>
+        <div class="row row-wrap">
             <!--content-->
-            <div class="col-xs-10 content2">
+            <div class="col-xs-12 content2">
                 <nav id='filters' class='filter-ui'></nav>
                 <div class="legend-ui">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi quod ex unde mollitia recusandae. Sunt tempore officiis, nulla doloribus incidunt consequuntur nam ab tenetur dignissimos eos rerum soluta animi porro.
@@ -136,37 +110,25 @@
     <script>
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWZpZm5hbmR5YSIsImEiOiJjaW9tbTNzNGIwMDRodTJseXJjNzVzaHEzIn0.gwFIGj5rUbuTinqSnRvWDA';
 var geojson = [
-{
+    <?php foreach($map_sekolah as $sekolah){ ?>
+    {
     "type": "Feature",
     "geometry": {
       "type": "Point",
-      "coordinates": [112.633719, -7.977854]
+      "coordinates": [<?php echo $sekolah['longitude']?>, <?php echo $sekolah['latitude']?>]
     },
     "properties": {
-      "title": "SMPN 1 Malang",
-      "description": "1714 14th St NW, Washington DC",
-      "marker-color": "#48cfad",
+      "title": "<?php echo $sekolah['Nama_sekolah']?>",
+      "description": "<?php echo $sekolah['Nama_sekolah']?>",
+      "marker-color": "<?php echo $sekolah['marker_color']?>",
       "marker-size": "large",
       "marker-symbol": "college",
-      "image": "assets/img/logo-smp/50x50/50x50_smp1.png",
+      "image": "assets/img/logo-smp/50x50/<?php echo $sekolah['Logo']?>",
+      "id" : "<?php echo $sekolah['Id_sekolah']?>",
+      "skor": "<?php echo $sekolah['Skor_total']?>",
     }
   },
-  {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [112.634835,-7.976703]
-    },
-    "properties": {
-      "title": "Mapbox SFaaaaaaaa",
-      "description": "155 9th St, San Francisco",
-      "marker-color": "#fc4353",
-      "marker-size": "large",
-      "marker-symbol": "college",
-      "marker-color": "#ed5565",
-      "image": "assets/img/logo-smp/50x50/50x50_smp1.png",
-    }
-  }
+    <?php } ?>
 ];
     
 var map = L.mapbox.map('map', 'afifnandya.07ji72gf').setView([-7.977, 112.634], 18);
@@ -178,7 +140,7 @@ myLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;
     var popupContent =  '<img src="<?php echo base_url() ?>' + feature.properties.image + '" class="img-popup">'+
-                        '<ul class="map-popup"><li class="li-title">SMPN 1 </li><li>Skor Kualitas : 88</li><li><a target="_blank" class="popup" href="<?php echo base_url() ?>' + feature.properties.title + '">'+'Detail</a></li></ul>';
+                        '<ul class="map-popup"><li class="li-title">'+feature.properties.title+'</li><li>Skor Kualitas :'+ feature.properties.skor+'</li><li><a class="popup" href="<?php echo site_url('sekolah')."/" ?>' + feature.properties.id + '">'+'Detail</a></li></ul>';
     marker.bindPopup(popupContent,{
         closeButton: true,
         minWidth: 170
@@ -238,19 +200,21 @@ myLayer.on('mouseover', function(e) {
 //}); 
 </script>
     <script>
-        $('#afif').click(function(e){
+//        if($('#toggle-nav').hasClass('toggle-nav-aktif')){
+//                $('.left-menu2').css('width','0%');
+//                $('.content2').css('width','100%');
+//            }
+        $('#toggle-nav').click(function(e){
             e.preventDefault();
-            if($('#afif').hasClass('afif-aktif')){
-                $('.left-nav-wrap').animate({width:'10%'});
-                $('.left-menu').animate({width:'10%'});
-                $('.content').animate({width:'90%'});
-                $('#afif').removeClass('afif-aktif');
+            if($('#toggle-nav').hasClass('toggle-nav-aktif')){
+//                $('.left-menu2').animate({width:'16.66666667%'});
+                $('.left-menu2').animate({left:'0'},{ duration: "slow",easing: "swing" });
+                $('#toggle-nav').removeClass('toggle-nav-aktif');
             }
             else{
-                $('.left-nav-wrap').animate({width:'16.66666667%'});
-                $('.left-menu').animate({width:'16.66666667%'});
-    $('.content').animate({width:'83.33333333%'});
-    $('#afif').addClass('afif-aktif');   
+//                $('.left-menu2').animate({width:'0%'});
+                $('.left-menu2').animate({left:'-100%'},{ duration: "slow",easing: "swing" });
+                $('#toggle-nav').addClass('toggle-nav-aktif');   
             }
 });
     </script>

@@ -96,7 +96,10 @@ nav{
 
 }
 .center-nav input{
-    width: 50%;
+    width: 60%;
+    margin-left: 35%;
+    position: absolute;
+    top: 5px;
 }
 .right-nav{
     height: 50px;

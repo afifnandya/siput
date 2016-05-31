@@ -13,54 +13,22 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slick.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slick-theme.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/font/flaticon.css">
-<!--
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/owl.theme.default.min.css">
--->
     <style>
         .profile-smp .banner-image {
             width: 100%;
             height: 300px;
             background: linear-gradient(to bottom,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.2)
-    ),url(<?php echo base_url() ?>assets/img/cover-smp/smp1-sover2.jpg) no-repeat center center;   
+    ),url(<?php echo $banner ?>) no-repeat center center;   
             background-size: cover;
         }
     </style>
 
 </head>
-
+<!--<?php print_r($data_sekolah)?>-->
 <body>
-    <nav>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-2 no-padding left-nav-wrap">
-                    <div class="left-nav">
-                        <p>SIPUT
-                        <a href="<?php echo base_url() ?>javascript:" id="afif" class="afif-aktif"><i class="fa fa-bars"></i></a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xs-8 no-padding">
-                    <div class="center-nav">
-                        <div class="search-nav">
-                            <input type="text" placeholder="search">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2 no-padding">
-                    <div class="right-nav">
-                        <ul>
-                            <li class="user-name">
-                                Afif Nandya</li>
-                            <li class="user-photo">
-                                <img src="<?php echo base_url() ?>holder.js/50x50">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+  <!-- nav -->
+   <?php $this->load->view('nav')?>
+   <!-- end nav -->
     <div class="container-fluid">
         <div class="row row-wrap">
             <!--left-menu-->
@@ -73,25 +41,25 @@
             <div class="col-xs-10 content">
                 <div class="profile-smp">
                     <div class="banner-image"></div>
-                    <img src="<?php echo base_url() ?>assets/img/logo-smp/SMPN_1_MALANG_t.jpg" class="profile-image">
-                    <p class="nama-smp">SMP Negeri 1 Malang</p>
+                    <img src="<?php echo $logo ?>" class="profile-image">
+                    <p class="nama-smp"><?php echo $nama ?></p>
                 </div>
                 <div class="container-fluid biodata-wrapper">
                     <div class="biodata-smp info-dasar col-xs-3">
                         <p class="biodata-heading">Alamat</p>
-                        <p class="biodata-body"><i class="fa fa-map-marker"></i>Perum.Bumi Asri Blok C No.4</p>
+                        <p class="biodata-body"><i class="fa fa-map-marker"></i><?php echo $alamat?></p>
                     </div>
                     <div class="biodata-smp info-dasar col-xs-3">
                         <p class="biodata-heading">Website</p>
-                        <p class="biodata-body"><i class="fa fa-globe"></i><a href="<?php echo base_url() ?>">SMPN 1 Malang</a></p>
+                        <p class="biodata-body"><i class="fa fa-globe"></i><a href="<?php echo $web ?>"><?php echo $web?></a></p>
                     </div>
                     <div class="biodata-smp info-dasar col-xs-3">
                         <p class="biodata-heading">Telephon</p>
-                        <p class="biodata-body"><i class="fa fa-phone"></i>0341 - 463307</p>
+                        <p class="biodata-body"><i class="fa fa-phone"></i><?php echo $telp ?></p>
                     </div>
                     <div class="biodata-smp info-dasar col-xs-3">
                         <p class="biodata-heading">Email</p>
-                        <p class="biodata-body"><i class="fa fa-envelope"></i>smpn1@gmail.com</p>
+                        <p class="biodata-body"><i class="fa fa-envelope"></i><?php echo $email?></p>
                     </div>
                 </div>
                 
@@ -105,36 +73,30 @@
                         </div>
                         <div class="media">
                             <div class="media-left">
-                                <a href="<?php echo base_url() ?>#">
-                                    <img class="media-object" src="<?php echo base_url() ?>assets/img/struktur-smp/smpn1/smp1-wakil_ks-sufairoh-50.jpg" alt="...">
-                                </a>
+                                <img class="media-object" src="<?php echo $foto_kepala_sekolah?>" alt="...">
                             </div>
                             <div class="media-body">
                                 <p class="media-heading people-job">Kepala Sekolah</p>
-                                <p class="people-name">Dra.Lilik Emawati M.Pd</p>
+                                <p class="people-name"><?php echo $nama_kepala_sekolah ?></p>
                             </div>
                         </div>
                         <div class="media">
                             <div class="media-left">
-                                <a href="<?php echo base_url() ?>#">
-                                    <img class="media-object" src="<?php echo base_url() ?>assets/img/struktur-smp/smpn1/smp1-ks-dewi-50.jpg" alt="...">
-                                </a>
+                                <img class="media-object" src="<?php echo $wk1_foto_kepala_sekolah?>" alt="...">
                             </div>
                             <div class="media-body">
-                                <p class="media-heading people-job">Waka Kurikulum</p>
-                                <p class="people-name">Dra.Dewi Rukiati</p>
+                                <p class="media-heading people-job">Wakil Kepala 1</p>
+                                <p class="people-name"><?php echo $wk1_nama_kepala_sekolah?></p>
                             </div>
                         </div>
 
                         <div class="media">
                             <div class="media-left">
-                                <a href="<?php echo base_url() ?>#">
-                                    <img class="media-object" src="<?php echo base_url() ?>assets/img/struktur-smp/smpn1/smp1-wit-50.jpg" alt="...">
-                                </a>
+                                    <img class="media-object" src="<?php echo $wk2_foto_kepala_sekolah?>" alt="...">
                             </div>
                             <div class="media-body">
-                                <p class="media-heading people-job">Waka Kesiswaan</p>
-                                <p class="people-name">Dra.Sri Widayati</p>
+                                <p class="media-heading people-job">Wakil Kepala 2</p>
+                                <p class="people-name"><?php echo $wk2_nama_kepala_sekolah?></p>
                             </div>
                         </div>
                     </div>
@@ -148,15 +110,14 @@
                         <div class="visi-misi">
                             <div class="biodata-smp">
                                 <p class="biodata-heading visi-heading">Visi</p>
-                                <p class="biodata-body visi-body" style="margin-bottom:10px;">Unggul Berlandaskan Budi Pekerti Luhur Yang Berwawasan Lingkungan</p>
+                                <p class="biodata-body visi-body" style="margin-bottom:10px;"><?php echo $visi?></p>
                             </div>
                             <div class="biodata-smp">
                                 <p class="biodata-heading visi-heading">Misi</p>
                                 <ul class="biodata-body visi-body">
-                                    <li>Melaksanakan pengembangan kurikulum berbasis nasional.</li>
-                                    <li>Melaksanakan pengembangan proses pembelajaran yang bermutu sesuai standar nasional.</li>
-                                    <li>Melaksanakan pengembangan standar kelulusan baik akademis maupun non akademis sesuai standar nasional.</li>
-                                    <li>Melaksanakan pengembangan tenaga pendidik dan tenaga kependidikan sesuai standar nasional. </li>
+                                   <?php foreach($misi as $data){ ?>
+                                    <li><?php echo $data?></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -1047,19 +1008,19 @@ $('#gedung-slider,#perpus-slider,#kantin-slider,#lapangan-slider,#ibadah-slider,
             })
     </script>
     <script>
-        $('#afif').click(function(e){
+            $('#toggle-nav').click(function(e){
             e.preventDefault();
-            if($('#afif').hasClass('afif-aktif')){
+            if($('#toggle-nav').hasClass('toggle-nav-aktif')){
                 $('.left-nav-wrap').animate({width:'10%'});
                 $('.left-menu').animate({width:'10%'});
                 $('.content').animate({width:'90%'});
-                $('#afif').removeClass('afif-aktif');
+                $('#toggle-nav').removeClass('toggle-nav-aktif');
             }
             else{
                 $('.left-nav-wrap').animate({width:'16.66666667%'});
                 $('.left-menu').animate({width:'16.66666667%'});
                 $('.content').animate({width:'83.33333333%'});
-                $('#afif').addClass('afif-aktif');   
+                $('#toggle-nav').addClass('toggle-nav-aktif');   
             }
 });
     </script>

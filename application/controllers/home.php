@@ -19,7 +19,39 @@ class home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('home');
+        if($this->session->userdata('isLogin')){
+            $this->load->model('m_sekolah');
+            $query = $this->m_sekolah->get_map_sekolah();
+            for($i=0;$i<count($query);$i++){
+                if(intval($query[$i]['Skor_total']) < "20"){
+                    $query[$i]['marker_color'] = '#e74c3c';
+                }
+                elseif(intval($query[$i]['Skor_total']) > "21" and intval($query[$i]['Skor_total']) <= "40"){
+                    $query[$i]['marker_color'] = '#e7832b';
+                }
+                elseif(intval($query[$i]['Skor_total']) > "41" and intval($query[$i]['Skor_total']) <= "60"){
+                    $query[$i]['marker_color'] = '#f1c40f';
+                }
+                elseif(intval($query[$i]['Skor_total']) > "61" and intval($query[$i]['Skor_total']) <= "80"){
+                    $query[$i]['marker_color'] = '#3498db';
+                }
+                elseif(intval($query[$i]['Skor_total']) > "81" and intval($query[$i]['Skor_total']) <= "100"){
+                    $query[$i]['marker_color'] = '#2abb67';
+                }
+                else{
+                    $query[$i]['marker_color'] = 'a';
+                }
+                
+            }
+            $data['map_sekolah'] = $query;
+//            echo "<pre>";
+//            print_r($query);
+//            echo "</pre>";
+            $this->load->view('home',$data);   
+        }
+        else{
+           redirect('login');
+        }
 	}
 }
 

@@ -332,16 +332,16 @@ $(document).ready(function(){
     if(value < 20){
         $(key).css('color','#e74c3c')
     }
-    if(value > 21 && value < 40){
+    else if(value > 21 && value < 40){
         $(key).css('color','#e7832b')
     }
-    if(value > 41 && value < 60){
+    else if(value > 41 && value < 60){
         $(key).css('color','#f1c40f')
     }
-    if(value > 61 && value < 80){
+    else if(value > 61 && value < 80){
         $(key).css('color','#3498db')
     }
-    if(value > 81 && value < 100){
+    else if(value > 81 && value < 100){
         $(key).css('color','#2abb67')
     }
     });
